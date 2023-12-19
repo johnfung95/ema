@@ -1,24 +1,25 @@
+"use client";
 import Image from "next/image";
 import imgPath from "../../public/ema.png";
+import { useState } from "react";
 
-type EmaProps = {
-  withForm: boolean;
-};
+const words = "psadfassadfasfdsfsdfsafsadfaefwefawef   dsfaefae fdfa d ffefaesdsdfdsfsfsdfsd";
 
-const words = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+const Ema: React.FC = () => {
+  const [wordCount, setWordCount] = useState(words.length);
 
-const Ema: React.FC = ({ withForm = false }: EmaProps) => {
-  // with form or not, if not form, then no form component inside the Ema
   return (
-    <div className="relative place-self-center min-w-max">
-      <div className="static bottom-12 text-black mx-2 mt-2 mb-6 p-2 flex flex-col gap-12">
-        <p className="text-center">{words}</p>
+    <div className="sticky place-self-center">
+      <div className="absolute w-full h-full flex flex-col-reverse justify-around items-center">
+        <p className="text-black italic text-sm px-4 break-all">{words}</p>
+        {wordCount < 30  && <div className=""></div>}
+        {wordCount >= 30 && <div className=""></div>}
       </div>
       <Image
         src={imgPath}
         quality={100}
         alt="Ema"
-        className="w-80"
+        className="w-48 min-w-full"
       />
     </div>
   );
