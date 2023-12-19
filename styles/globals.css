@@ -59,3 +59,5 @@ body {
 		background-position: -49px -35px;
 	}
 }
+
+#portal:hover + #cover-img { filter: blur(4px); }
