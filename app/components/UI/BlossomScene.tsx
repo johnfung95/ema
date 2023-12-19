@@ -87,7 +87,7 @@ class BlossomScene {
 		this.petalsTypes = config.petalsTypes;
 		this.gravity = config.gravity || 0.8;
 		this.windMaxSpeed = config.windMaxSpeed || 6;
-		this.windMagnitude = 0.3;
+		this.windMagnitude = 0.8;
 		this.windDuration = 0;
 		this.width = this.container.offsetWidth;
 		this.height = this.container.offsetHeight;
