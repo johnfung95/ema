@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
+import Link from "next/link";
 
 interface Props {
   /**
@@ -69,9 +70,9 @@ export default function DrawerAppBar(props: Props) {
           </IconButton>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff", "&:hover": {backgroundColor: "rgb(212 212 216)", color: "rgb(24 24 27)"} }}>
+              <Link key={item} href="/" className="p-2">
                 {item}
-              </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>

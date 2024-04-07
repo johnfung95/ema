@@ -5,12 +5,15 @@ import Navbar from "./UI/Navbar"
 
 const EmaList: React.FC = () => {
   const emas = []
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 15; i++) {
     emas.push(<Ema key={i} />)
   }
 
+  // TODO: dynamic number pages
+  // TODO: randamize the sequence of the ema on each reload
+
   return (
-    <div className="h-screen">
+    <div className="h-screen min-w-max">
       <Navbar />
       <Image
         id="cover-img"
