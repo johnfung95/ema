@@ -55,7 +55,7 @@ export default function DrawerAppBar(props: Props) {
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ backgroundColor: "rgb(24 24 27)", opacity: 0.7 }}
+        sx={{ backgroundColor: "rgb(24 24 27)", opacity: 0.6 }}
       
       >
         <Toolbar>
@@ -70,7 +70,7 @@ export default function DrawerAppBar(props: Props) {
           </IconButton>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Link key={item} href="/" className="p-2">
+              <Link key={item} href="/" className="p-2 hover:text-amber-400">
                 {item}
               </Link>
             ))}
