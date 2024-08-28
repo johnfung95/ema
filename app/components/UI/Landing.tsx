@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import imgPath from "../../../public/cover.jpg";
 import { useEffect } from "react";
@@ -26,21 +27,22 @@ const Landing: React.FC = () => {
   return (
     <div className="cover">
       <Navbar />
-      <div className="absolute flex justify-center items-center w-screen h-screen z-50 overflow-hidden">
-      <div id="blossom_container" className="z-50"></div>
+      <div className="absolute flex flex-col justify-center items-center w-screen h-screen z-50 overflow-hidden">
+        <div id="blossom_container" className="z-50 w-full h-full absolute"></div>
         <div
           id="portal"
-          className="mt-32 w-2/6 h-4/6 bg-white text-black rounded-t-2xl opacity-40 z-50 hover:opacity-60 hover:cursor-pointer"
+          className="mt-16 md:mt-32 w-5/6 md:w-2/6 h-3/6 md:h-4/6 bg-white text-black rounded-t-2xl opacity-40 z-50 hover:opacity-60 hover:cursor-pointer"
         >
-          <Link href="/ema" className="flex justify-center items-center h-full">Enter</Link>
+          <Link href="/ema" className="flex justify-center items-center h-full text-lg md:text-xl">Enter</Link>
         </div>
         <Image
           id="cover-img"
           src={imgPath}
           quality={100}
           alt="Shrine"
-          className="h-full w-screen -z-50"
+          className="h-full w-screen object-cover -z-50"
           fill={true}
+          priority
         />
       </div>
     </div>

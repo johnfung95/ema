@@ -11,14 +11,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
 import Link from "next/link";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
 }
 
@@ -28,6 +25,8 @@ const navItems = ["Home", "About", "Contact"];
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -47,28 +46,35 @@ export default function DrawerAppBar(props: Props) {
     </Box>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ backgroundColor: "rgb(24 24 27)", opacity: 0.6 }}
-      
+        sx={{ 
+          backgroundColor: "rgb(24 24 27)", 
+          opacity: 0.6,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0
+        }}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          {isMobile && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center" }}>
             {navItems.map((item) => (
               <Link key={item} href="/" className="p-2 hover:text-amber-400">
                 {item}
@@ -84,7 +90,7 @@ export default function DrawerAppBar(props: Props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -92,7 +98,8 @@ export default function DrawerAppBar(props: Props) {
               boxSizing: "border-box",
               width: drawerWidth,
             },
-            backgroundColor: "rgb(113 113 122);", opacity: 0.7 
+            backgroundColor: "rgb(113 113 122)",
+            opacity: 0.7 
           }}
         >
           {drawer}

@@ -19,7 +19,7 @@ const getData = async (perPage: number, pageNum: number) => {
     const response = { items, itemCount };
     return response;
   } catch (error) {
-    throw new Error("Failed to fecth data. Please try again later");
+    throw new Error("Failed to fetch data. Please try again later");
   }
 };
 
@@ -46,8 +46,8 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
   return (
     <>
       <Background>
-        <div className="mx-auto">
-          <ul className="grid grid-cols-5 gap-6 text-center">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 text-center">
             {data.items.map((item) => (
               <li key={item._id}>
                 <Ema content={item.content} />
@@ -55,27 +55,27 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
             ))}
           </ul>
           {isPageOutOfRange ? (
-            <div className="flex mt-16 justify-center items-center text-center">
-              <div className="flex flex-col gap-20">
-                <h1 className="font-extrabold text-9xl">Error 404</h1>
-                <p className="font-extrabold text-4xl">Cannot find page.</p>
-                <p className="font-extrabold text-4xl">
+            <div className="flex mt-8 sm:mt-16 justify-center items-center text-center">
+              <div className="flex flex-col gap-8 sm:gap-20">
+                <h1 className="font-extrabold text-4xl sm:text-9xl">Error 404</h1>
+                <p className="font-extrabold text-xl sm:text-4xl">Cannot find page.</p>
+                <p className="font-extrabold text-xl sm:text-4xl">
                   Please try again later.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="flex justify-center items-center mt-16 text-black">
-              <div className="flex border-[1px] gap-4 rounded-[10px] border-light-green p-4">
+            <div className="flex justify-center items-center mt-8 sm:mb-8 text-black">
+              <div className="flex flex-wrap justify-center border-[1px] gap-2 sm:gap-4 rounded-[10px] border-light-green p-2 sm:p-4">
                 {pageNum === 1 ? (
-                  <div className="opacity-60" aria-disabled="true">
+                  <div className="opacity-60 px-1 sm:px-2" aria-disabled="true">
                     Prev
                   </div>
                 ) : (
                   <Link
                     href={`?page=${prevPage}`}
                     aria-label="Prev page"
-                    className="hover:text-white hover:bg-green-500 px-1 rounded-md"
+                    className="hover:text-white hover:bg-green-500 px-1 sm:px-2 rounded-md"
                   >
                     Prev
                   </Link>
@@ -85,7 +85,7 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
                     className={
                       pageNum === page
                         ? "bg-green-500 fw-bold px-2 rounded-md text-white"
-                        : "hover:bg-green-500 px-1 rounded-md"
+                        : "hover:bg-green-500 px-1 sm:px-2 rounded-md"
                     }
                     key={index}
                     href={`?page=${page}`}
@@ -94,14 +94,14 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
                   </Link>
                 ))}
                 {pageNum === totalPages ? (
-                  <div className="opacity-60" aria-disabled="true">
+                  <div className="opacity-60 px-1 sm:px-2" aria-disabled="true">
                     Next
                   </div>
                 ) : (
                   <Link
                     href={`?page=${nextPage}`}
                     aria-label="Next page"
-                    className="hover:text-white hover:bg-green-500 px-1 rounded-md"
+                    className="hover:text-white hover:bg-green-500 px-1 sm:px-2 rounded-md"
                   >
                     Next
                   </Link>

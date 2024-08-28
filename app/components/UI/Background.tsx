@@ -8,23 +8,21 @@ interface Props {
 }
 
 const Background = ({ children }: Props) => {
-  // TODO: dynamic number pages
-  // TODO: randamize the sequence of the ema on each reload
-
   return (
-    <div className="h-screen min-w-max z-50">
+    <div className="min-h-screen w-full overflow-x-hidden relative">
       <Navbar />
       <Image
         id="cover-img"
         src={imgPath}
         quality={100}
         alt="Shrine"
-        className="-z-50 blur-sm bg-repeat-y"
+        className="object-cover object-center blur-sm"
         fill={true}
+        priority
       />
-      <div className="mt-8">
-
-      {children}
+      <div className="absolute inset-0 bg-black bg-opacity-30" />
+      <div className="relative z-10 pt-20 px-4 sm:px-6 lg:px-8">
+        {children}
       </div>
     </div>
   );
