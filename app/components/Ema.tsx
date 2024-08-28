@@ -8,8 +8,8 @@ const Ema = ({content}) => {
     <div className="sticky place-self-center">
       <div className="absolute w-full h-full flex flex-col-reverse justify-around items-center">
         <p className="text-black italic text-sm px-4 break-all">{content}</p>
-        {content.length < 30  && <div className=""></div>}
-        {content.length >= 30 && <div className=""></div>}
+        {/* {content < 30  && <div className=""></div>}
+        {content >= 30 && <div className=""></div>} */}
       </div>
       <Image
         src={imgPath}

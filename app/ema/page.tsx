@@ -8,13 +8,13 @@ const getData = async (perPage: number, pageNum: number) => {
     const client = await connectToDatabase();
     const db = client.db("ema");
     const items = await db
-      .collection("content")
+      .collection("wish")
       .find({})
       .skip(perPage * (pageNum - 1))
       .limit(perPage)
       .toArray();
 
-    const itemCount = await db.collection("content").countDocuments({});
+    const itemCount = await db.collection("wish").countDocuments({});
 
     const response = { items, itemCount };
     return response;
@@ -50,7 +50,7 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
           <ul className="grid grid-cols-5 gap-6 text-center">
             {data.items.map((item) => (
               <li key={item._id}>
-                <Ema content={item.name} />
+                <Ema content={item.content} />
               </li>
             ))}
           </ul>
