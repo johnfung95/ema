@@ -21,7 +21,7 @@ const Background = ({ children }: Props) => {
         priority
       />
       <div className="absolute inset-0 bg-black bg-opacity-30" />
-      <div className="relative z-10 pt-20 px-4 sm:px-6 lg:px-8">
+      <div className="relative h-vh-100 z-10 pt-20 px-4 sm:px-6 lg:px-8">
         {children}
       </div>
     </div>

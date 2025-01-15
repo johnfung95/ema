@@ -31,7 +31,7 @@ const Landing: React.FC = () => {
         <div id="blossom_container" className="z-50 w-full h-full absolute"></div>
         <div
           id="portal"
-          className="mt-16 md:mt-32 w-5/6 md:w-2/6 h-3/6 md:h-4/6 bg-white text-black rounded-t-2xl opacity-40 z-50 hover:opacity-60 hover:cursor-pointer"
+          className="mt-16 md:mt-32 w-5/6 md:w-2/6 h-3/6 md:h-4/6 max-h-80 bg-white text-black rounded-2xl opacity-40 z-50 hover:opacity-60 hover:cursor-pointer"
         >
           <Link href="/ema" className="flex justify-center items-center h-full text-lg md:text-xl">Enter</Link>
         </div>

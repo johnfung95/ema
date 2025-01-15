@@ -83,7 +83,7 @@ class BlossomScene {
 		this.container = container;
 		this.placeholder = document.createElement('div');
 		this.petals = [];
-		this.numPetals = config.numPetals || 12;
+		this.numPetals = config.numPetals || 18;
 		this.petalsTypes = config.petalsTypes;
 		this.gravity = config.gravity || 0.8;
 		this.windMaxSpeed = config.windMaxSpeed || 6;
