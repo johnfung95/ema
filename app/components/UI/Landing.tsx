@@ -27,11 +27,11 @@ const Landing: React.FC = () => {
   return (
     <div className="cover">
       <Navbar />
-      <div className="absolute flex flex-col justify-center items-center w-screen h-screen z-50 overflow-hidden">
+      <div className="absolute flex flex-col justify-center items-center w-screen h-screen z-50  top-0 left-0">
         <div id="blossom_container" className="z-50 w-full h-full absolute"></div>
         <div
           id="portal"
-          className="mt-16 md:mt-32 w-5/6 md:w-2/6 h-3/6 md:h-4/6 max-h-80 bg-white text-black rounded-2xl opacity-40 z-50 hover:opacity-60 hover:cursor-pointer"
+          className="w-5/6 md:w-2/6 h-3/6 md:h-4/6 max-h-80 bg-white text-black rounded-2xl opacity-40 z-50 hover:opacity-60 hover:cursor-pointer"
         >
           <Link href="/ema" className="flex justify-center items-center h-full text-lg md:text-xl">Enter</Link>
         </div>

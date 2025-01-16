@@ -36,7 +36,7 @@ export default function DrawerAppBar(props: Props) {
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding sx={{'&:hover': {backgroundColor: "rgb(212 212 216)}" }}}>
+          <ListItem key={item} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={item} />
             </ListItemButton>
@@ -53,8 +53,8 @@ export default function DrawerAppBar(props: Props) {
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ 
-          backgroundColor: "rgb(24 24 27)", 
+        sx={{
+          backgroundColor: "rgb(24 24 27)",
           opacity: 0.6,
           position: "fixed",
           top: 0,
@@ -75,11 +75,15 @@ export default function DrawerAppBar(props: Props) {
             </IconButton>
           )}
           <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center" }}>
-            {navItems.map((item) => (
-              <Link key={item} href="/" className="p-2 hover:text-amber-400">
-                {item}
-              </Link>
-            ))}
+            <Link key="home" href="/ema" className="p-2 hover:text-amber-400">
+              Home
+            </Link>
+            <Link key="about" href="/about" className="p-2 hover:text-amber-400">
+              About
+            </Link>
+            <Link key="contact" href="/" className="p-2 hover:text-amber-400">
+              Contact
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
@@ -99,7 +103,7 @@ export default function DrawerAppBar(props: Props) {
               width: drawerWidth,
             },
             backgroundColor: "rgb(113 113 122)",
-            opacity: 0.7 
+            opacity: 0.7
           }}
         >
           {drawer}
