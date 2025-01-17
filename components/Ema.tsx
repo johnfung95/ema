@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import imgPath from "../public/ema.png";
-import EmaDataModel from "../models/EmaDataModel"
+import EmaDataModel from "../interface/EmaDataModel"
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
 import { GoComment } from "react-icons/go";
@@ -30,7 +30,7 @@ const Ema: React.FC<EmaDataModel> = ({ id, content }) => {
           src={imgPath}
           quality={100}
           alt="Descriptive alt text for Ema"
-          className="w-full h-42"
+          className="w-full h-44"
         />
         {/*TODO: add on click handler */}
         <Link href={`/ema-content/${id}`} className="absolute inset-0 mt-12 flex flex-col justify-center items-center hover:cursor-pointer">
