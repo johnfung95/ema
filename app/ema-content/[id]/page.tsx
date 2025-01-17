@@ -1,6 +1,6 @@
-import Ema from "../../components/Ema"
-import EmaDataModel from "../../components/models/EmaDataModel"
-import { getSingleEma } from "@/app/utils/database"
+import Ema from "../../../components/Ema"
+import EmaDataModel from "../../../models/EmaDataModel"
+import { getSingleEma } from "../../../utils/database"
 
 const EmaContentPage: React.FC<EmaDataModel> = async ({params}: any) => {
     params = await params

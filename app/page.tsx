@@ -1,4 +1,4 @@
-import Landing from "./components/UI/Landing";
+import Landing from "../components/UI/Landing";
 
 const Home: React.FC = () => {
   return (

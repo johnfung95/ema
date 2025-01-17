@@ -1,5 +1,5 @@
 import Image from "next/image";
-import imgPath from "../../../public/cover.jpg";
+import imgPath from "../../public/cover.jpg";
 import Navbar from "./Navbar";
 import { ReactNode } from "react";
 
@@ -9,7 +9,7 @@ interface Props {
 
 const Background = ({ children }: Props) => {
   return (
-    <div className="min-h-screen w-full overflow-x-hidden relative">
+    <div className="min-h-screen w-full h-full overflow-x-hidden relative">
       <Navbar />
       <Image
         id="cover-img"
@@ -20,8 +20,8 @@ const Background = ({ children }: Props) => {
         fill={true}
         priority
       />
-      <div className="absolute inset-0 bg-black bg-opacity-30" />
-      <div className="relative h-vh-100 z-10 pt-20 px-4 sm:px-6 lg:px-8">
+      <div className="relative inset-0 bg-black bg-opacity-30" />
+      <div className="relative h-full z-10 pt-20 px-4 sm:px-6 lg:px-8 md:h-vh-100">
         {children}
       </div>
     </div>

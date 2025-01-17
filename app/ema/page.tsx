@@ -1,7 +1,7 @@
-import Ema from "../components/Ema";
-import PageNumBar from "../components/UI/PageNumBar"
-import ErrorPageNumber from "../components/UI/ErrorPageNumber";
-import { getEmas } from "../utils/database";
+import Ema from "../../components/Ema";
+import PageNumBar from "../../components/UI/PageNumBar"
+import ErrorPageNumber from "../../components/UI/ErrorPageNumber";
+import { getEmas } from "../../utils/database";
 
 const EmaPage: React.FC = async ({ searchParams }: any) => {
   searchParams = await searchParams

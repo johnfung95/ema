@@ -13,7 +13,7 @@ interface pageNumberBar {
 const PageNumBar:React.FC<pageNumberBar> = ({pageNum, prevPage, pages, totalPages, nextPage}) => {
 
     return (<div className="flex justify-center items-center mt-8 sm:mb-8 text-black">
-        <div className="flex flex-wrap justify-center border-[1px] gap-2 sm:gap-4 rounded-[10px] border-light-green p-2 sm:p-4">
+        <div className="flex flex-wrap justify-center border-[1px] gap-2 sm:gap-4 rounded-[10px] border-light-green p-2 sm:p-4 bg-light-gray">
             {pageNum === 1 ? (
                 <div className="opacity-60 px-1 sm:px-2" aria-disabled="true">
                     Prev

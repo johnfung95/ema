@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import imgPath from "../../../public/cover.jpg";
+import imgPath from "../../public/cover.jpg";
 import { useEffect } from "react";
 import { Petal, BlossomScene, BlossomSceneConfig } from "./BlossomScene";
 import Link from "next/link";

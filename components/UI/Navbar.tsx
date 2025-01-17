@@ -19,8 +19,7 @@ interface Props {
   window?: () => Window;
 }
 
-const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+const drawerWidth = 200;
 
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
@@ -35,13 +34,31 @@ export default function DrawerAppBar(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+          <Link key={`menu-btn-home`} href="/ema" className="hover:text-orange-400">
+            <ListItem key={"home"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 225 216)}" } }}>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={"Home"} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+      </List>
+      <List>
+          <Link key={`menu-btn-about`} href="/about" className="hover:text-orange-400">
+            <ListItem key={"about"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={"About"} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+      </List>
+      <List>
+          <Link key={`menu-btn-contact`} href="/contact" className="hover:text-orange-400">
+            <ListItem key={"contact"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={"Contact"} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
       </List>
     </Box>
   );
@@ -103,7 +120,7 @@ export default function DrawerAppBar(props: Props) {
               width: drawerWidth,
             },
             backgroundColor: "rgb(113 113 122)",
-            opacity: 0.7
+            opacity: 0.8
           }}
         >
           {drawer}
