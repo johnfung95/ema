@@ -32,10 +32,8 @@ const Ema: React.FC<EmaDataModel> = ({ id, content }) => {
           alt="Descriptive alt text for Ema"
           className="w-full h-44"
         />
-        {/*TODO: add on click handler */}
         <Link href={`/ema-content/${id}`} className="absolute inset-0 mt-12 flex flex-col justify-center items-center hover:cursor-pointer">
           <p className="text-black italic text-xs sm:text-sm overflow-hidden break-words text-center mx-4">
-            {/* TODO: reveal the rest of the text in another view, clickable button */}
             {truncateContent(content)}
           </p>
         </Link>

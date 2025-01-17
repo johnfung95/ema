@@ -52,10 +52,10 @@ export default function DrawerAppBar(props: Props) {
           </Link>
       </List>
       <List>
-          <Link key={`menu-btn-contact`} href="/contact" className="hover:text-orange-400">
-            <ListItem key={"contact"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+          <Link key={`menu-btn-create`} href="/create" className="hover:text-orange-400">
+            <ListItem key={"create"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
               <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={"Contact"} />
+                <ListItemText primary={"Create Ema"} />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -98,8 +98,8 @@ export default function DrawerAppBar(props: Props) {
             <Link key="about" href="/about" className="p-2 hover:text-amber-400">
               About
             </Link>
-            <Link key="contact" href="/" className="p-2 hover:text-amber-400">
-              Contact
+            <Link key="create" href="/create-ema" className="p-2 hover:text-amber-400">
+              Create Ema
             </Link>
           </Box>
         </Toolbar>
