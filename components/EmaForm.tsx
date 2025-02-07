@@ -9,8 +9,8 @@ const EmaForm: React.FC = () => {
     }
 
     return (
-        <form className="mt-8 flex flex-col gap-6" onSubmit={handleSubmit}>
-            <div className="relative w-full flex justify-center items-center">
+        <form className="mt-8 flex flex-col gap-6" onSubmit={handleSubmit} >
+            <div className="relative w-full flex justify-center items-center ">
                 <Image
                     src={imgPath}
                     quality={100}
@@ -18,7 +18,7 @@ const EmaForm: React.FC = () => {
                     className="w-96 h-96 min-w-80 min-h-80"
                 />
                 <div className="absolute inset-0 flex flex-col justify-end mb-8 items-center ">
-                    <textarea className="p-2 resize-none w-80 h-44 bg-transparent text-black italic text-xs sm:text-sm overflow-hidden break-words text-center mx-4">
+                    <textarea className="p-2 resize-none w-80 h-44 bg-transparent text-black italic text-xs sm:text-sm overflow-hidden break-words text-center mx-4 border-2 border-stone-900 rounded overflow-y-scroll">
                     </textarea>
                 </div>
             </div >

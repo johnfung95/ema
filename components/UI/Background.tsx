@@ -9,7 +9,7 @@ interface Props {
 
 const Background = ({ children }: Props) => {
   return (
-    <div className="min-h-screen w-full h-full overflow-x-hidden relative">
+    <div className="min-h-screen w-full h-full overflow-x-hidden overflow-y-auto relative">
       <Navbar />
       <Image
         id="cover-img"

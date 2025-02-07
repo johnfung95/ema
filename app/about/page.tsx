@@ -3,7 +3,8 @@ import React from "react"
 const AboutPage: React.FC = () => {
     return (
         <div>
-            <h1>
+            {/* TODO: put some ema photos here and there */}
+            <h1 className="z-10">
                 Ema (絵馬)
             </h1>
             <p>
@@ -21,6 +22,9 @@ const AboutPage: React.FC = () => {
 
                 Ema are a rich part of Japanese cultural heritage, embodying the hopes and prayers of countless individuals seeking connection with the divine.
             </p>
+            <div className="absolute top-0 left-0 h-full w-full bg-amber-600 opacity-20 -z-10">
+
+            </div>
         </div>
     )
 }

@@ -14,7 +14,7 @@ const truncateContent = (text: String) => {
   return text;
 };
 
-const Ema: React.FC<EmaDataModel> = ({ id, content }) => {
+const EmaList: React.FC<EmaDataModel> = ({ id, content }) => {
   const heartClickHandler = () => {
     console.log("heart clicked")
   }
@@ -57,4 +57,4 @@ const Ema: React.FC<EmaDataModel> = ({ id, content }) => {
   );
 };
 
-export default Ema;
+export default EmaList;

@@ -34,7 +34,7 @@ export default function DrawerAppBar(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
-          <Link key={`menu-btn-home`} href="/ema" className="hover:text-orange-400">
+          <Link key={`menu-btn-home`} href="/emas" className="hover:text-orange-400">
             <ListItem key={"home"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 225 216)}" } }}>
               <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText primary={"Home"} />
@@ -72,11 +72,12 @@ export default function DrawerAppBar(props: Props) {
         component="nav"
         sx={{
           backgroundColor: "rgb(24 24 27)",
-          opacity: 0.6,
+          opacity: 0.7,
           position: "fixed",
           top: 0,
           left: 0,
-          right: 0
+          right: 0,
+          height: "3.1rem"
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -86,13 +87,12 @@ export default function DrawerAppBar(props: Props) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2 }}
             >
               <MenuIcon />
             </IconButton>
           )}
-          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center" }}>
-            <Link key="home" href="/ema" className="p-2 hover:text-amber-400">
+          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center"}}>
+            <Link key="home" href="/emas" className="p-2 hover:text-amber-400">
               Home
             </Link>
             <Link key="about" href="/about" className="p-2 hover:text-amber-400">
