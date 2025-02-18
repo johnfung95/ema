@@ -14,6 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { useSession, getProviders, signIn, signOut } from "next-auth/react"
 
 interface Props {
   window?: () => Window;
@@ -24,41 +25,54 @@ const drawerWidth = 200;
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [providers, setProviders] = React.useState(null)
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { data: session } = useSession()
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  React.useEffect(() => {
+    const settingProviders = async () => {
+      const response = await getProviders();
+      console.log(response)
+      setProviders(response);
+    };
+
+    settingProviders();
+  }, []);
+
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
-          <Link key={`menu-btn-home`} href="/emas" className="hover:text-orange-400">
-            <ListItem key={"home"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 225 216)}" } }}>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={"Home"} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+        <Link key={`menu-btn-home`} href="/emas" className="hover:text-orange-400">
+          <ListItem key={"home"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 225 216)}" } }}>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary={"Home"} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
       <List>
-          <Link key={`menu-btn-about`} href="/about" className="hover:text-orange-400">
-            <ListItem key={"about"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={"About"} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+        <Link key={`menu-btn-about`} href="/about" className="hover:text-orange-400">
+          <ListItem key={"about"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary={"About"} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
       <List>
-          <Link key={`menu-btn-create`} href="/create" className="hover:text-orange-400">
-            <ListItem key={"create"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={"Create Ema"} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+        <Link key={`menu-btn-create`} href="/create" className="hover:text-orange-400">
+          <ListItem key={"create"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary={"Create Ema"} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
     </Box>
   );
@@ -91,7 +105,7 @@ export default function DrawerAppBar(props: Props) {
               <MenuIcon />
             </IconButton>
           )}
-          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center"}}>
+          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center" }}>
             <Link key="home" href="/emas" className="p-2 hover:text-amber-400">
               Home
             </Link>
@@ -101,6 +115,20 @@ export default function DrawerAppBar(props: Props) {
             <Link key="create" href="/create-ema" className="p-2 hover:text-amber-400">
               Create Ema
             </Link>
+            {session?.user ? <button onClick={() => signOut()}>Sign out</button> : <>
+              {providers &&
+                Object.values(providers).map((provider: any) => (
+                  <button
+                    type="button"
+                    key={provider.name}
+                    onClick={() => signIn(provider.id)}
+                    className="black_btn"
+                  >
+                    Sign In
+                  </button>
+                ))}
+            </>
+            }
           </Box>
         </Toolbar>
       </AppBar>
