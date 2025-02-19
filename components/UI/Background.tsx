@@ -16,7 +16,7 @@ const Background = ({ children }: Props) => {
         src={imgPath}
         quality={100}
         alt="Shrine"
-        className="object-cover object-center blur-sm"
+        className="object-cover object-center blur-sm "
         fill={true}
         priority
       />
