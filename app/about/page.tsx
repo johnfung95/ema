@@ -11,10 +11,10 @@ const AboutPage: React.FC = () => {
             </p>
             <Image
                     src="/shrine.png"
-                    alt="Ema plaques"
+                    alt="Japanese Shrine"
                     width={300}
                     height={300}
-                    className="float-left mr-4 mt-4 rounded"
+                    className="float-left mr-4 mt-4 rounded-sm"
                 />
             <h2 className="text-xl mt-4 md:text-2xl">Summary of Ema (絵馬)</h2>
             <p className="mt-2 text-base md:text-lg">
@@ -32,7 +32,7 @@ const AboutPage: React.FC = () => {
                     alt="Ema plaques"
                     width={300}
                     height={300}
-                    className="float-right ml-4 mb-4 rounded"
+                    className="float-right ml-4 mb-4 rounded-sm"
                 />
                 <li>
                     <strong>Express Wishes:</strong> Visitors write their personal prayers or wishes on the Ema, hoping for blessings or guidance from the kami (deities).

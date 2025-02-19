@@ -29,7 +29,7 @@ const EmaList: React.FC<EmaDataModel> = ({ id, content }) => {
         <Image
           src={imgPath}
           quality={100}
-          alt="Descriptive alt text for Ema"
+          alt="Ema"
           className="w-full h-44"
         />
         <Link href={`/ema-content/${id}`} className="absolute inset-0 mt-12 flex flex-col justify-center items-center hover:cursor-pointer">
@@ -42,14 +42,14 @@ const EmaList: React.FC<EmaDataModel> = ({ id, content }) => {
         <div>
           <div className="flex justify-center items-center m-2 gap-2">
             <button>
-              <FaRegHeart className="text-xl hover:pointer" onClick={heartClickHandler} />
+              <FaRegHeart className="text-xl hover:cursor-pointer" onClick={heartClickHandler} />
             </button>
             <p>1234</p>
           </div>
         </div>
         <div className="m-2">
           <button>
-            <GoComment className="text-xl hover:pointer" onClick={commentClickHandler} />
+            <GoComment className="text-xl hover:cursor-pointer" onClick={commentClickHandler} />
           </button>
         </div>
       </div>
