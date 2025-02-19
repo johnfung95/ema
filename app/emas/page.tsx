@@ -1,4 +1,3 @@
-import EmaList from "../../components/EmaList";
 import Ema from "../../components/Ema"
 import PageNumBar from "../../components/UI/PageNumBar"
 import ErrorPageNumber from "../../components/UI/ErrorPageNumber";
@@ -32,7 +31,6 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
         <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
           {data.items.map((item) => (
             <li key={item._id}>
-              {/* <EmaList id={item._id.toString()} content={item.content} /> */}
               <Ema 
                 id={item._id.toString()} 
                 content={item.content}

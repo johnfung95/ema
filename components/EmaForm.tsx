@@ -3,14 +3,19 @@ import Image from "next/image"
 import imgPath from "../public/ema.png";
 
 const EmaForm: React.FC = () => {
+    // TODO: get the session of the user
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        // TODO: to save the user name, allow add tags, save the current time
+        // TODO: initiate 0 likes and empty comments
+        // TODO: create a create-ema-api
         e.preventDefault();
     }
 
     return (
         <form className="mt-8 flex flex-col gap-6" onSubmit={handleSubmit} >
             <div className="relative w-full flex justify-center items-center ">
+                {/* TODO: try to reuse the Ema component and change some internal contents */}
                 <Image
                     src={imgPath}
                     quality={100}
