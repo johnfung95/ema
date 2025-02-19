@@ -1,5 +1,6 @@
-import {MongoClient} from "mongodb"
+import { MongoClient } from "mongodb"
 import { ObjectId } from "mongodb";
+
 const MONGODB_URI = process.env.MONGODB_URI;
 
 let client = null;
@@ -47,10 +48,39 @@ export const getSingleEma = async (id: string | any) => {
     const client = await connectToDatabase();
     const db = client.db("ema");
     const oid = new ObjectId(id)
-    const item = await db.collection("wish").findOne({_id: oid})
+    const item = await db.collection("wish").findOne({ _id: oid })
 
     return item;
   } catch (error) {
     throw new Error("Failed to fetch data. Please try again later");
   }
 };
+
+export const getUserByEmail = async (email: String) => {
+  try {
+    const client = await connectToDatabase()
+    const db = client.db("accounts")
+    const item = await db.collection("users").findOne({ email: email })
+
+    return item
+  } catch (error) {
+    throw new Error("Failed to get session user with email.")
+  }
+}
+
+export const createNewUser = async (email: string, username: string, image: string) => {
+  try {
+    const client = await connectToDatabase()
+    const db = client.db("accounts")
+    const result = await db.collection("users").insertOne({
+      email: email,
+      username: username,
+      image: image
+    })
+
+    
+
+  } catch (error) {
+    throw new Error("Failed to create new user in db.")
+  }
+}

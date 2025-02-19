@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Link from "next/link";
+import Image from "next/image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useSession, getProviders, signIn, signOut } from "next-auth/react"
@@ -37,7 +38,6 @@ export default function DrawerAppBar(props: Props) {
   React.useEffect(() => {
     const settingProviders = async () => {
       const response = await getProviders();
-      console.log(response)
       setProviders(response);
     };
 
@@ -47,7 +47,36 @@ export default function DrawerAppBar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <List>
+      {session?.user ? (
+        <List key="mobile-signout">
+          <ListItem sx={{ justifyContent: "center" }}>
+            <Image
+              src={session?.user.image}
+              width={40}
+              height={40}
+              className="rounded-full p-1"
+              alt="profile"
+            />
+          </ListItem>
+          <ListItem key={"menu-btn-signout"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+            <ListItemButton onClick={() => signOut({ redirect: false })} className="hover:text-orange-400" sx={{ textAlign: "center" }}>
+              <ListItemText secondary={"Sign Out"} />
+            </ListItemButton>
+
+          </ListItem>
+        </List>
+      ) :
+        providers &&
+        Object.values(providers).map((provider: any) => (
+          <List key="mobile-signin">
+            <ListItem key={"menu-btn-signin"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+              <ListItemButton onClick={() => signIn(provider.id, { redirect: false })} className="hover:text-orange-400" sx={{ textAlign: "center" }}>
+                <ListItemText primary={"Sign In"} />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        ))}
+      <List key="mobile-home">
         <Link key={`menu-btn-home`} href="/emas" className="hover:text-orange-400">
           <ListItem key={"home"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 225 216)}" } }}>
             <ListItemButton sx={{ textAlign: "center" }}>
@@ -56,7 +85,7 @@ export default function DrawerAppBar(props: Props) {
           </ListItem>
         </Link>
       </List>
-      <List>
+      <List key="mobile-about">
         <Link key={`menu-btn-about`} href="/about" className="hover:text-orange-400">
           <ListItem key={"about"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
             <ListItemButton sx={{ textAlign: "center" }}>
@@ -65,7 +94,7 @@ export default function DrawerAppBar(props: Props) {
           </ListItem>
         </Link>
       </List>
-      <List>
+      <List key="mobile-create">
         <Link key={`menu-btn-create`} href="/create" className="hover:text-orange-400">
           <ListItem key={"create"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
             <ListItemButton sx={{ textAlign: "center" }}>
@@ -105,7 +134,7 @@ export default function DrawerAppBar(props: Props) {
               <MenuIcon />
             </IconButton>
           )}
-          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center" }}>
+          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center", paddingLeft: "5rem" }}>
             <Link key="home" href="/emas" className="p-2 hover:text-amber-400">
               Home
             </Link>
@@ -115,20 +144,31 @@ export default function DrawerAppBar(props: Props) {
             <Link key="create" href="/create-ema" className="p-2 hover:text-amber-400">
               Create Ema
             </Link>
-            {session?.user ? <button onClick={() => signOut()}>Sign out</button> : <>
-              {providers &&
-                Object.values(providers).map((provider: any) => (
-                  <button
-                    type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
-                    className="black_btn"
-                  >
-                    Sign In
-                  </button>
-                ))}
-            </>
-            }
+          </Box>
+          <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+            {session?.user ? <div className="flex">
+              <Image
+                src={session?.user.image}
+                width={40}
+                height={40}
+                className="rounded-full p-1"
+                alt="profile"
+              />
+              <button onClick={() => signOut({ redirect: false })} className="hover:text-amber-400 text-sm">
+                Sign out
+              </button>
+            </div>
+              : providers &&
+              Object.values(providers).map((provider: any) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id, { redirect: false })}
+                  className="black_btn hover:text-amber-400 text-sm"
+                >
+                  Sign In
+                </button>
+              ))}
           </Box>
         </Toolbar>
       </AppBar>
