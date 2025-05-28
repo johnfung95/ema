@@ -15,7 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { useSession, getProviders, signIn, signOut } from "next-auth/react"
+import { useSession, getProviders, signIn, signOut } from "next-auth/react";
 
 interface Props {
   window?: () => Window;
@@ -26,10 +26,10 @@ const drawerWidth = 200;
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [providers, setProviders] = React.useState(null)
+  const [providers, setProviders] = React.useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -44,41 +44,80 @@ export default function DrawerAppBar(props: Props) {
     settingProviders();
   }, []);
 
-
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       {session?.user ? (
         <List key="mobile-signout">
           <ListItem sx={{ justifyContent: "center" }}>
             <Image
-              src={session?.user.image}
+              src={session.user.image}
               width={40}
               height={40}
               className="rounded-full p-1"
               alt="profile"
             />
           </ListItem>
-          <ListItem key={"menu-btn-signout"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
-            <ListItemButton onClick={() => signOut({ redirect: false })} className="hover:text-orange-400" sx={{ textAlign: "center" }}>
+          <ListItem
+            key={"menu-btn-signout"}
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "rgb(212, 212, 216)" } }}
+          >
+            <ListItemButton
+              onClick={() => signOut({ redirect: false })}
+              className="hover:text-orange-400"
+              sx={{ textAlign: "center" }}
+            >
               <ListItemText secondary={"Sign Out"} />
             </ListItemButton>
-
           </ListItem>
         </List>
-      ) :
-        providers &&
-        Object.values(providers).map((provider: any) => (
-          <List key="mobile-signin">
-            <ListItem key={"menu-btn-signin"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
-              <ListItemButton onClick={() => signIn(provider.id, { redirect: false })} className="hover:text-orange-400" sx={{ textAlign: "center" }}>
+      ) : (
+        <List key="mobile-signin">
+          {providers &&
+            Object.values(providers).map((provider: any) => (
+              <ListItem
+                key={provider.name}
+                disablePadding
+                sx={{ "&:hover": { backgroundColor: "rgb(212, 212, 216)" } }}
+                className="hover:text-orange-400"
+              >
+                <ListItemButton
+                  onClick={() => signIn(provider.id, { redirect: false })}
+                  sx={{ textAlign: "center" }}
+                >
+                  <ListItemText primary={"Sign In"} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          {/* Always show the Sign In button if there are no providers */}
+          {(!providers || Object.values(providers).length === 0) && (
+            <ListItem
+              key={"menu-btn-signin-default"}
+              disablePadding
+              sx={{ "&:hover": { backgroundColor: "rgb(212, 212, 216)" } }}
+              className="hover:text-orange-400"
+            >
+              <ListItemButton
+                onClick={() => signIn("defaultProviderId", { redirect: false })} // Replace with the appropriate provider ID
+                sx={{ textAlign: "center" }}
+              >
                 <ListItemText primary={"Sign In"} />
               </ListItemButton>
             </ListItem>
-          </List>
-        ))}
+          )}
+        </List>
+      )}
       <List key="mobile-home">
-        <Link key={`menu-btn-home`} href="/emas" className="hover:text-orange-400">
-          <ListItem key={"home"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 225 216)}" } }}>
+        <Link
+          key={`menu-btn-home`}
+          href="/emas"
+          className="hover:text-orange-400"
+        >
+          <ListItem
+            key={"home"}
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "rgb(212 225 216)}" } }}
+          >
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={"Home"} />
             </ListItemButton>
@@ -86,8 +125,16 @@ export default function DrawerAppBar(props: Props) {
         </Link>
       </List>
       <List key="mobile-about">
-        <Link key={`menu-btn-about`} href="/about" className="hover:text-orange-400">
-          <ListItem key={"about"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+        <Link
+          key={`menu-btn-about`}
+          href="/about"
+          className="hover:text-orange-400"
+        >
+          <ListItem
+            key={"about"}
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "rgb(212 212 216)}" } }}
+          >
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={"About"} />
             </ListItemButton>
@@ -95,8 +142,16 @@ export default function DrawerAppBar(props: Props) {
         </Link>
       </List>
       <List key="mobile-create">
-        <Link key={`menu-btn-create`} href="/create" className="hover:text-orange-400">
-          <ListItem key={"create"} disablePadding sx={{ '&:hover': { backgroundColor: "rgb(212 212 216)}" } }}>
+        <Link
+          key={`menu-btn-create`}
+          href="/create"
+          className="hover:text-orange-400"
+        >
+          <ListItem
+            key={"create"}
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "rgb(212 212 216)}" } }}
+          >
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={"Create Ema"} />
             </ListItemButton>
@@ -106,7 +161,8 @@ export default function DrawerAppBar(props: Props) {
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -120,7 +176,7 @@ export default function DrawerAppBar(props: Props) {
           top: 0,
           left: 0,
           right: 0,
-          height: "3.1rem"
+          height: "3.1rem",
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -134,41 +190,75 @@ export default function DrawerAppBar(props: Props) {
               <MenuIcon />
             </IconButton>
           )}
-          <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1, justifyContent: "center", paddingLeft: "5rem" }}>
+          <Box
+            sx={{
+              display: { xs: "none", sm: "flex" },
+              flexGrow: 1,
+              justifyContent: "center",
+              paddingLeft: "5rem",
+              marginRight: "1rem",
+            }}
+          >
             <Link key="home" href="/emas" className="p-2 hover:text-amber-400">
               Home
             </Link>
-            <Link key="about" href="/about" className="p-2 hover:text-amber-400">
+            <Link
+              key="about"
+              href="/about"
+              className="p-2 hover:text-amber-400"
+            >
               About
             </Link>
-            <Link key="create" href="/create-ema" className="p-2 hover:text-amber-400">
+            <Link
+              key="create"
+              href="/create-ema"
+              className="p-2 hover:text-amber-400"
+            >
               Create Ema
             </Link>
           </Box>
           <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-            {session?.user ? <div className="flex">
-              <Image
-                src={session?.user.image}
-                width={40}
-                height={40}
-                className="rounded-full p-1"
-                alt="profile"
-              />
-              <button onClick={() => signOut({ redirect: false })} className="hover:text-amber-400 text-sm">
-                Sign out
-              </button>
-            </div>
-              : providers &&
-              Object.values(providers).map((provider: any) => (
+            <div className="flex">
+              {session?.user ? (
+                <>
+                  <Image
+                    src={session.user.image}
+                    width={40}
+                    height={40}
+                    className="rounded-full p-1"
+                    alt="profile"
+                  />
+                  <button
+                    onClick={() => signOut({ redirect: false })}
+                    className="hover:text-amber-400 hover:cursor-pointer text-sm"
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : providers && Object.values(providers).length > 0 ? (
+                providers &&
+                Object.values(providers).map((provider: any) => (
+                  <button
+                    type="button"
+                    key={provider.name}
+                    onClick={() => signIn(provider.id, { redirect: false })}
+                    className="black_btn hover:text-amber-400 hover:cursor-pointer text-sm"
+                  >
+                    Sign In
+                  </button>
+                ))
+              ) : (
                 <button
                   type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id, { redirect: false })}
-                  className="black_btn hover:text-amber-400 text-sm"
+                  onClick={() =>
+                    signIn("defaultProviderId", { redirect: false })
+                  } // Replace with appropriate default provider ID
+                  className="black_btn hover:text-amber-400 hover:cursor-pointer text-sm"
                 >
                   Sign In
                 </button>
-              ))}
+              )}
+            </div>
           </Box>
         </Toolbar>
       </AppBar>
@@ -188,7 +278,7 @@ export default function DrawerAppBar(props: Props) {
               width: drawerWidth,
             },
             backgroundColor: "rgb(113 113 122)",
-            opacity: 0.8
+            opacity: 0.8,
           }}
         >
           {drawer}

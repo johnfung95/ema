@@ -21,7 +21,6 @@ const handler = NextAuth({
             }
         },
         async signIn({ account, profile }) {
-            console.log(profile)
             const userExists = await getUserByEmail(profile.email)
 
             if (!userExists) {

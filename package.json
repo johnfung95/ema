@@ -19,6 +19,7 @@
     "@types/react-dom": "18.2.15",
     "eslint": "8.53.0",
     "eslint-config-next": "14.0.2",
+    "moment": "^2.30.1",
     "mongodb": "^6.8.0",
     "mongoose": "^8.10.1",
     "next": "^15.1.4",
@@ -30,6 +31,7 @@
     "react-icons": "^5.4.0",
     "tailwindcss": "^4.0.7",
     "typescript": "5.2.2",
-    "yzhanweather": "^1.0.5"
+    "yzhanweather": "^1.0.5",
+    "zustand": "^5.0.5"
   }
 }

@@ -8,6 +8,9 @@ import { GoComment } from "react-icons/go";
 interface EmaPlaque {
     id: string,
     content: string,
+    author: string,
+    createdAt: string,
+    likes: number,
     imgStyle?: string,
     bottomBarStyle?: string,
     link?: string | null
@@ -21,7 +24,7 @@ const truncateContent = (text: String) => {
     return text;
 };
 
-const Ema: React.FC<EmaPlaque> = ({ id, content, imgStyle, bottomBarStyle, link }) => {
+const Ema: React.FC<EmaPlaque> = ({ id, content, author, createdAt, likes, imgStyle, bottomBarStyle, link }) => {
     const heartClickHandler = () => {
         console.log("heart clicked")
     }
@@ -40,15 +43,28 @@ const Ema: React.FC<EmaPlaque> = ({ id, content, imgStyle, bottomBarStyle, link 
                     className={imgStyle}
                 />
                 {link ?
-                    <Link href={`/ema-content/${id}`} className="absolute inset-0 mt-12 flex flex-col justify-center items-center hover:cursor-pointer">
+                    <Link href={`/ema-content/${id}`} className="absolute inset-0 mt-16 flex flex-col justify-center items-center hover:cursor-pointer">
                         <p className="text-black italic text-xs sm:text-sm overflow-hidden break-words text-center mx-4">
                             {truncateContent(content)}
                         </p>
                     </Link>
                     :
                     <div className="absolute inset-0 flex flex-col justify-end items-center ">
-                        <div className="p-2 resize-none w-80 h-44 bg-transparent text-black italic text-xs sm:text-sm overflow-hidden break-words text-center mx-4 rounded-sm overflow-y-scroll">
-                            {content}
+                        <div className="flex flex-col justify-between p-2 resize-none w-80 h-44 bg-transparent text-black italic text-xs sm:text-sm overflow-hidden break-words text-center mx-4 rounded-sm overflow-y-scroll">
+                            <div>
+                                {content}
+                            </div>
+                            {
+                                (createdAt && author) &&
+                                <div className="flex justify-between w-full">
+                                    <div className="text-right text-black text-sm m-4">
+                                        {createdAt}
+                                    </div>
+                                    <div className="text-right text-black text-sm m-4">
+                                        {author}
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 }
@@ -59,7 +75,7 @@ const Ema: React.FC<EmaPlaque> = ({ id, content, imgStyle, bottomBarStyle, link 
                         <button>
                             <FaRegHeart className="text-xl hover:cursor-pointer" onClick={heartClickHandler} />
                         </button>
-                        <p>1234</p>
+                        <p className="text-red-400">{likes}</p>
                     </div>
                 </div>
                 <div className="m-2">

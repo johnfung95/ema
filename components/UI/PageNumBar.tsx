@@ -1,16 +1,8 @@
 import React from "react"
 import Link from "next/link";
+import PageNumberBar from "../../interface/PageNumberBar";
 
-interface pageNumberBar {
-  pageNum: number
-  prevPage: number
-  pages: []
-  totalPages: number
-  nextPage: number
-}
-
-
-const PageNumBar:React.FC<pageNumberBar> = ({pageNum, prevPage, pages, totalPages, nextPage}) => {
+const PageNumBar:React.FC<PageNumberBar> = ({pageNum, prevPage, pages, totalPages, nextPage, pageChangeHandler}) => {
 
     return (<div className="flex justify-center items-center sm:mb-8 text-black">
         <div className="flex flex-wrap justify-center border-[1px] gap-2 sm:gap-4 rounded-[10px] border-light-green p-2 sm:p-4 bg-light-gray">

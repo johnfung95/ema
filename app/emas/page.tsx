@@ -1,6 +1,7 @@
 import Ema from "../../components/Ema"
 import PageNumBar from "../../components/UI/PageNumBar"
 import ErrorPageNumber from "../../components/UI/ErrorPageNumber";
+import moment from "moment"
 import { getEmas } from "../../utils/database";
 
 const EmaPage: React.FC = async ({ searchParams }: any) => {
@@ -35,7 +36,11 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
                 id={item._id.toString()} 
                 content={item.content}
                 imgStyle={"w-full h-64"} 
-                link={`/ema-content/${item._id.toString()}`}/>
+                link={`/ema-content/${item._id.toString()}`}
+                author={item.author}
+                likes={item.likes}
+                createdAt={moment(data.items[0]["createdAt"]).format("YYYY-MM-DD")}
+                />
             </li>
           ))}
         </ul>

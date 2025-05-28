@@ -1,24 +1,30 @@
-import EmaDataModel from "../../../interface/EmaDataModel"
-import { getSingleEma } from "../../../utils/database"
-import Ema from "../../../components/Ema"
+import { getSingleEma, getSingleComments } from "../../../utils/database";
+import EmaDetailView from "@/components/EmaDetailView";
 
-const EmaContentPage: React.FC<EmaDataModel> = async ({ params }: any) => {
-    params = await params
-
-    const singleEma = await getSingleEma(params.id)
-    const id = singleEma.id
-    const content = singleEma.content
-
-    return (
-        <div>
-            <Ema
-                id={id}
-                content={content}
-                imgStyle={"w-96 h-96 min-w-80 min-h-80`"}
-                bottomBarStyle={"w-96"}
-            />
-        </div>
-        )
+interface EmaContentProps {
+    params: {
+        id: string;
+    };
 }
 
-export default EmaContentPage
+const EmaContentPage: React.FC<EmaContentProps> = async ({ params }) => {
+    const { id } = await params;
+    const singleEma = await getSingleEma(id);
+    const commentsId = singleEma.commentsId;
+    const commentsObj = await getSingleComments(commentsId);
+    let sortedComments = []
+    if (commentsObj && commentsObj.comments.length > 0) {
+        sortedComments = commentsObj.comments.sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    }
+    
+
+    return (
+        <EmaDetailView 
+            id={id}
+            ema={singleEma}
+            comments={sortedComments}
+        />
+    );
+};
+
+export default EmaContentPage;
