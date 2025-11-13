@@ -2,7 +2,9 @@ import React from "react";
 
 const Spinner: React.FC = () => {
   return (
-    <div className="loader"></div>
+    <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-60 flex justify-center items-center">
+      <div className="loader"></div>
+    </div>
   );
 };
 
