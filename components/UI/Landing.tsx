@@ -2,12 +2,16 @@
 
 import Image from "next/image";
 import imgPath from "../../public/cover.jpg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Petal, BlossomScene, BlossomSceneConfig } from "./BlossomScene";
 import Link from "next/link";
-import Navbar from "./Navbar"
+import Navbar from "./Navbar";
+import Spinner from "./Loading";
+import { useLoading } from "../../contexts/LoadingContext";
 
 const Landing: React.FC = () => {
+  const loadingContext = useLoading();
+
   useEffect(() => {
     const petalsTypes = [
       new Petal({ customClass: "petal-style1" }),
@@ -24,16 +28,29 @@ const Landing: React.FC = () => {
     const myBlossomScene = new BlossomScene(myBlossomSceneConfig);
   }, []);
 
+  const handleClick = () => {
+    loadingContext.setIsLoading(true);
+  };
+
   return (
     <div className="cover">
       <Navbar />
-      <div className="absolute flex flex-col justify-center items-center w-screen h-screen z-50  top-0 left-0">
-        <div id="blossom_container" className="z-50 w-full h-full absolute"></div>
+      <div className="absolute flex flex-col justify-center items-center w-screen h-screen z-50 top-0 left-0">
+        <div
+          id="blossom_container"
+          className="z-50 w-full h-full absolute"
+        ></div>
         <div
           id="portal"
           className="w-5/6 md:w-2/6 h-3/6 md:h-4/6 max-h-80 bg-white text-black rounded-2xl opacity-40 z-50 hover:opacity-60 hover:cursor-pointer"
         >
-          <Link href="/emas" className="flex justify-center items-center h-full text-lg md:text-xl">Enter</Link>
+          <Link
+            href="/emas"
+            onClick={handleClick}
+            className="flex justify-center items-center h-full text-lg md:text-xl"
+          >
+            Enter
+          </Link>
         </div>
         <Image
           id="cover-img"
@@ -44,6 +61,7 @@ const Landing: React.FC = () => {
           fill={true}
           priority
         />
+        {loadingContext.isLoading && <Spinner />}
       </div>
     </div>
   );
