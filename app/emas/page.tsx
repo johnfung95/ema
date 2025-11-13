@@ -1,11 +1,12 @@
-import Ema from "../../components/Ema"
-import PageNumBar from "../../components/UI/PageNumBar"
+import Ema from "../../components/Ema";
+import PageNumBar from "../../components/UI/PageNumBar";
 import ErrorPageNumber from "../../components/UI/ErrorPageNumber";
-import moment from "moment"
+import moment from "moment";
 import { getEmas } from "../../utils/database";
+import Spinner from "@/components/UI/Loading";
 
 const EmaPage: React.FC = async ({ searchParams }: any) => {
-  searchParams = await searchParams
+  searchParams = await searchParams;
   let pageNum = parseInt(searchParams.page, 10);
   pageNum = !pageNum || pageNum < 1 ? 1 : pageNum;
 
@@ -26,31 +27,38 @@ const EmaPage: React.FC = async ({ searchParams }: any) => {
   }
 
   return (
-
     <div className="h-full flex justify-center items-center">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 ">
         <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
           {data.items.map((item) => (
             <li key={item._id}>
-              <Ema 
-                id={item._id.toString()} 
+              <Ema
+                id={item._id.toString()}
                 content={item.content}
-                imgStyle={"w-full h-64"} 
+                imgStyle={"w-full h-64"}
                 link={`/ema-content/${item._id.toString()}`}
                 author={item.author}
                 likes={item.likes}
-                createdAt={moment(data.items[0]["createdAt"]).format("YYYY-MM-DD")}
-                />
+                createdAt={moment(data.items[0]["createdAt"]).format(
+                  "YYYY-MM-DD"
+                )}
+              />
             </li>
           ))}
         </ul>
-        {isPageOutOfRange ? <ErrorPageNumber />
-          : (
-            <PageNumBar pageNum={pageNum} prevPage={prevPage} pages={pages} totalPages={totalPages} nextPage={nextPage} />
-          )}
+        {isPageOutOfRange ? (
+          <ErrorPageNumber />
+        ) : (
+          <PageNumBar
+            pageNum={pageNum}
+            prevPage={prevPage}
+            pages={pages}
+            totalPages={totalPages}
+            nextPage={nextPage}
+          />
+        )}
       </div>
     </div>
-
   );
 };
 

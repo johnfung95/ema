@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import PageNumberBar from "../../interface/PageNumberBar";
+import PageNumberBar from "@/interface/PageNumberBar";
 
 const PageNumBar: React.FC<PageNumberBar> = ({
   pageNum,
@@ -35,7 +35,7 @@ const PageNumBar: React.FC<PageNumberBar> = ({
                   ? "bg-green-500 fw-bold px-2 rounded-md text-white"
                   : "hover:bg-green-500 px-1 sm:px-2 rounded-md hover:cursor-pointer"
               }
-              key={page} 
+              key={page}
             >
               {page}
             </div>

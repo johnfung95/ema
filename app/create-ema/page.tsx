@@ -1,10 +1,7 @@
-import EmaForm from "../../components/EmaForm";
+import EmaForm from "@/components/EmaForm";
 
 const CreateEmaPage: React.FC = async ({ searchParams }: any) => {
-
-    return (
-        <EmaForm />
-    );
+  return <EmaForm />;
 };
 
 export default CreateEmaPage;

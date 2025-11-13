@@ -4,6 +4,7 @@ import imgPath from "../public/ema.png";
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
 import { GoComment } from "react-icons/go";
+import { useEma } from "@/contexts/EmaContext";
 
 interface EmaPlaque {
   id: string;
@@ -34,12 +35,15 @@ const Ema: React.FC<EmaPlaque> = ({
   bottomBarStyle,
   link,
 }) => {
+  const emaContext = useEma();
+
   const heartClickHandler = () => {
     console.log("heart clicked");
   };
 
   const commentClickHandler = () => {
     console.log("comment clicked");
+    emaContext.setIsCommentClicked(true);
   };
 
   return (
@@ -87,12 +91,9 @@ const Ema: React.FC<EmaPlaque> = ({
             <p className="text-red-400">{likes}</p>
           </div>
         </div>
-        <div className="m-2">
+        <div className="m-2" onClick={commentClickHandler}>
           <button>
-            <GoComment
-              className="text-xl hover:cursor-pointer"
-              onClick={commentClickHandler}
-            />
+            <GoComment className="text-xl hover:cursor-pointer" />
           </button>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { getSingleEma, getSingleComments } from "../../../utils/database";
+import { getSingleEma, getSingleComments } from "@/utils/database";
 import EmaDetailView from "@/components/EmaDetailView";
 
 interface Params {

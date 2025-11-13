@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import Ema from "./Ema";
-import CommentSection from "./CommentSection";
-import CommentField from "./CommentField";
-import ContentPageNumBar from "./UI/ContentPageNumBar";
+import Ema from "@/components/Ema";
+import CommentSection from "@/components/CommentSection";
+import CommentField from "@/components/CommentField";
+import ContentPageNumBar from "@/components/UI/ContentPageNumBar";
 import moment from "moment";
+import { useEma } from "@/contexts/EmaContext";
 
 interface EmaDetail {
   id: string;
@@ -13,6 +14,8 @@ interface EmaDetail {
 }
 
 const EmaDetailView: React.FC<EmaDetail> = ({ id, ema, comments }) => {
+  const emaContext = useEma();
+  console.log(emaContext.isCommentClicked);
   const [pageComments, setPageComments] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const perPage = 5;
@@ -53,9 +56,11 @@ const EmaDetailView: React.FC<EmaDetail> = ({ id, ema, comments }) => {
         createdAt={moment(ema.createdAt).format("YYYY-MM-DD")} // Format date
         likes={ema.likes}
       />
-      <div className="mt-8">
-        <CommentField id={id} />
-      </div>
+      {emaContext.isCommentClicked && (
+        <div className="mt-8">
+          <CommentField id={id} />
+        </div>
+      )}
       {pageComments.length > 0 && (
         <div className="mt-8">
           <div className="m-4">

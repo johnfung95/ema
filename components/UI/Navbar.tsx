@@ -15,7 +15,6 @@ import Link from "next/link";
 import Image from "next/image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { useSession, getProviders, signIn, signOut } from "next-auth/react";
 
 interface Props {
   window?: () => Window;
@@ -26,87 +25,15 @@ const drawerWidth = 200;
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [providers, setProviders] = React.useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { data: session } = useSession();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    const settingProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    };
-
-    settingProviders();
-  }, []);
-
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      {session?.user ? (
-        <List key="mobile-signout">
-          <ListItem sx={{ justifyContent: "center" }}>
-            <Image
-              src={session.user.image}
-              width={40}
-              height={40}
-              className="rounded-full p-1"
-              alt="profile"
-            />
-          </ListItem>
-          <ListItem
-            key={"menu-btn-signout"}
-            disablePadding
-            sx={{ "&:hover": { backgroundColor: "rgb(212, 212, 216)" } }}
-          >
-            <ListItemButton
-              onClick={() => signOut({ redirect: false })}
-              className="hover:text-orange-400"
-              sx={{ textAlign: "center" }}
-            >
-              <ListItemText secondary={"Sign Out"} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      ) : (
-        <List key="mobile-signin">
-          {providers &&
-            Object.values(providers).map((provider: any) => (
-              <ListItem
-                key={provider.name}
-                disablePadding
-                sx={{ "&:hover": { backgroundColor: "rgb(212, 212, 216)" } }}
-                className="hover:text-orange-400"
-              >
-                <ListItemButton
-                  onClick={() => signIn(provider.id, { redirect: false })}
-                  sx={{ textAlign: "center" }}
-                >
-                  <ListItemText primary={"Sign In"} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          {/* Always show the Sign In button if there are no providers */}
-          {(!providers || Object.values(providers).length === 0) && (
-            <ListItem
-              key={"menu-btn-signin-default"}
-              disablePadding
-              sx={{ "&:hover": { backgroundColor: "rgb(212, 212, 216)" } }}
-              className="hover:text-orange-400"
-            >
-              <ListItemButton
-                onClick={() => signIn("defaultProviderId", { redirect: false })} // Replace with the appropriate provider ID
-                sx={{ textAlign: "center" }}
-              >
-                <ListItemText primary={"Sign In"} />
-              </ListItemButton>
-            </ListItem>
-          )}
-        </List>
-      )}
       <List key="mobile-home">
         <Link
           key={`menu-btn-home`}
@@ -216,49 +143,6 @@ export default function DrawerAppBar(props: Props) {
             >
               Create Ema
             </Link>
-          </Box>
-          <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-            <div className="flex">
-              {session?.user ? (
-                <>
-                  <Image
-                    src={session.user.image}
-                    width={40}
-                    height={40}
-                    className="rounded-full p-1"
-                    alt="profile"
-                  />
-                  <button
-                    onClick={() => signOut({ redirect: false })}
-                    className="hover:text-amber-400 hover:cursor-pointer text-sm"
-                  >
-                    Sign out
-                  </button>
-                </>
-              ) : providers && Object.values(providers).length > 0 ? (
-                providers &&
-                Object.values(providers).map((provider: any) => (
-                  <button
-                    type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id, { redirect: false })}
-                    className="black_btn hover:text-amber-400 hover:cursor-pointer text-sm"
-                  >
-                    Sign In
-                  </button>
-                ))
-              ) : (
-                <button
-                  type="button"
-                  onClick={() =>
-                    signIn("defaultProviderId", { redirect: false })
-                  } // Replace with appropriate default provider ID
-                  className="black_btn hover:text-amber-400 hover:cursor-pointer text-sm"
-                >
-                  Sign In
-                </button>
-              )}
-            </div>
           </Box>
         </Toolbar>
       </AppBar>

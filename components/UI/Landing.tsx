@@ -1,13 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import imgPath from "../../public/cover.jpg";
+import imgPath from "/public/cover.jpg";
 import { useEffect, useState } from "react";
-import { Petal, BlossomScene, BlossomSceneConfig } from "./BlossomScene";
+import {
+  Petal,
+  BlossomScene,
+  BlossomSceneConfig,
+} from "@/components/UI/BlossomScene";
 import Link from "next/link";
-import Navbar from "./Navbar";
-import Spinner from "./Loading";
-import { useLoading } from "../../contexts/LoadingContext";
+import Navbar from "@/components/UI/Navbar";
+import Spinner from "@/components/UI/Loading";
+import { useLoading } from "@/contexts/LoadingContext";
 
 const Landing: React.FC = () => {
   const loadingContext = useLoading();

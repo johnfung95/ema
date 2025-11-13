@@ -1,5 +1,5 @@
 import Image from "next/image";
-import imgPath from "../../public/cover.jpg";
+import imgPath from "/public/cover.jpg";
 import Navbar from "./Navbar";
 import { ReactNode } from "react";
 

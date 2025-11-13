@@ -1,11 +1,6 @@
-import "../styles/globals.css";
 import type { Metadata } from "next";
-// import { Inter } from 'next/font/google'
 import Background from "../components/UI/Background";
-import AuthProvider from "../components/Provider";
 import { getServerSession } from "next-auth";
-
-// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "EMA - Wishes",
@@ -22,9 +17,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthProvider session={session}>
-          <Background>{children}</Background>
-        </AuthProvider>
+        <Background>{children}</Background>
       </body>
     </html>
   );
