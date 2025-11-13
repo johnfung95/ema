@@ -1,4 +1,4 @@
-import { LoadingProvider } from "./contexts/LoadingContext";
+import { LoadingProvider } from "../contexts/LoadingContext";
 import "../styles/globals.css";
 import Landing from "../components/UI/Landing";
 
