@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { LoadingProvider } from "../contexts/LoadingContext";
+import { EmaProvider } from "@/contexts/EmaContext";
+import "../styles/globals.css";
 import Background from "../components/UI/Background";
 import { getServerSession } from "next-auth";
 
@@ -16,9 +19,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body>
-        <Background>{children}</Background>
-      </body>
+      <LoadingProvider>
+        <EmaProvider>
+          <body>
+            <Background>{children}</Background>
+          </body>
+        </EmaProvider>
+      </LoadingProvider>
     </html>
   );
 }

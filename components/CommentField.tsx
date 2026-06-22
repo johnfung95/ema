@@ -38,8 +38,8 @@ const CommentField: React.FC<CommentFieldProps> = ({ id }) => {
   return (
     <div className="flex justify-center items-center">
       <textarea
-        value={comment} // Bind textarea value to state
-        onChange={(e) => setComment(e.target.value)} // Update state on change
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
         placeholder="Your comments ..."
         rows={3}
         className="p-2 bg-white w-full rounded text-black mx-4 resize-none border-2 border-black"

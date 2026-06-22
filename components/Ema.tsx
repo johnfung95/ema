@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Image from "next/image";
 import imgPath from "../public/ema.png";
 import Link from "next/link";
@@ -41,8 +42,11 @@ const Ema: React.FC<EmaPlaque> = ({
     console.log("heart clicked");
   };
 
+  const plaqueClickHandler = () => {
+    emaContext.setIsCommentClicked(false);
+  };
+
   const commentClickHandler = () => {
-    console.log("comment clicked");
     emaContext.setIsCommentClicked(true);
   };
 
@@ -91,10 +95,12 @@ const Ema: React.FC<EmaPlaque> = ({
             <p className="text-red-400">{likes}</p>
           </div>
         </div>
-        <div className="m-2" onClick={commentClickHandler}>
-          <button>
-            <GoComment className="text-xl hover:cursor-pointer" />
-          </button>
+        <div className="m-2">
+          <Link href={`ema-content/${id}`} onClick={commentClickHandler}>
+            <button>
+              <GoComment className="text-xl hover:cursor-pointer" />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
